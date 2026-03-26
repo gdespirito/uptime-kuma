@@ -169,6 +169,7 @@ const {
     sendAPIKeyList,
     sendRemoteBrowserList,
     sendMonitorTypeList,
+    sendUserList,
 } = require("./client");
 const { statusPageSocketHandler } = require("./socket-handlers/status-page-socket-handler");
 const { databaseSocketHandler } = require("./socket-handlers/database-socket-handler");
@@ -184,6 +185,7 @@ const { proxySocketHandler } = require("./socket-handlers/proxy-socket-handler")
 const { dockerSocketHandler } = require("./socket-handlers/docker-socket-handler");
 const { maintenanceSocketHandler } = require("./socket-handlers/maintenance-socket-handler");
 const { apiKeySocketHandler } = require("./socket-handlers/api-key-socket-handler");
+const { userSocketHandler } = require("./socket-handlers/user-socket-handler");
 const { generalSocketHandler } = require("./socket-handlers/general-socket-handler");
 const { Settings } = require("./settings");
 const apicache = require("./modules/apicache");
@@ -1713,6 +1715,7 @@ let needSetup = false;
         dockerSocketHandler(socket);
         maintenanceSocketHandler(socket);
         apiKeySocketHandler(socket);
+        userSocketHandler(socket);
         remoteBrowserSocketHandler(socket);
         generalSocketHandler(socket, server);
         chartSocketHandler(socket);
@@ -1813,6 +1816,7 @@ async function afterLogin(socket, user) {
         sendProxyList(socket),
         sendDockerHostList(socket),
         sendAPIKeyList(socket),
+        sendUserList(socket),
         sendRemoteBrowserList(socket),
         sendMonitorTypeList(socket),
     ]);
